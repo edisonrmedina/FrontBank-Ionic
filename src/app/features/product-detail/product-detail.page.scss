@@ -11,6 +11,19 @@
   margin: 0 auto;
   background: #fff;
   border: 1px solid #e8e8e8;
+
+  @media (min-width: 768px) {
+    max-width: 720px;
+    border-radius: 8px;
+    margin-top: 20px;
+    height: auto;
+    min-height: calc(100% - 40px);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  }
+
+  @media (min-width: 1024px) {
+    max-width: 960px;
+  }
 }
 
 .banco-header {
@@ -37,6 +50,10 @@
   flex: 1;
   padding: 0 24px;
   overflow-y: auto;
+
+  @media (min-width: 768px) {
+    padding: 0 40px;
+  }
 }
 
 .detail-content {
@@ -104,6 +121,13 @@
   flex-direction: column;
   gap: 10px;
   padding: 16px 0 20px;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    gap: 16px;
+
+    .btn { width: auto; min-width: 160px; }
+  }
 }
 
 .btn {

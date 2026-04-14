@@ -8,6 +8,7 @@
     <h1 class="form-title">{{ pageTitle }}</h1>
 
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="form-grid">
 
       <div class="form-group" [class.has-error]="hasError('id')">
         <label for="id">ID</label>
@@ -43,6 +44,8 @@
         <label for="date_revision">Fecha Revisión</label>
         <input id="date_revision" type="date" formControlName="date_revision" data-testid="input-date-revision" />
       </div>
+
+      </div><!-- /form-grid -->
 
       <div class="form-actions">
         <button type="submit" class="btn btn-submit" [disabled]="form.invalid || isSubmitting" data-testid="btn-submit">Enviar</button>

@@ -54,3 +54,10 @@
     }
   }
 }
+
+/* Responsive: desktop background */
+@media (min-width: 768px) {
+  body, ion-app, app-root {
+    background: #f4f5f7;
+  }
+}
