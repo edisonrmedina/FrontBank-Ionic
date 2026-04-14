@@ -10,17 +10,18 @@ ion-content {
 .screen {
   display: flex;
   flex-direction: column;
-  min-height: 100%;
+  height: 100vh;
   max-width: 420px;
   margin: 0 auto;
   background: #fff;
   border: 1px solid #e8e8e8;
+  overflow: hidden;
 
   @media (min-width: 768px) {
     max-width: 720px;
     border-radius: 8px;
     margin-top: 20px;
-    margin-bottom: 20px;
+    height: calc(100vh - 40px);
     box-shadow: 0 2px 12px rgba(0,0,0,0.08);
   }
 
@@ -56,6 +57,8 @@ ion-content {
   flex-direction: column;
   flex: 1;
   padding: 0 20px;
+  overflow: hidden;
+  min-height: 0;
 
   @media (min-width: 768px) {
     padding: 0 32px;
@@ -65,7 +68,9 @@ ion-content {
 .product-list {
   border: 1px solid #e0e0e0;
   border-radius: 6px;
-  overflow: hidden;
+  overflow-y: auto;
+  flex: 1;
+  min-height: 0;
 }
 
 .product-row {
