@@ -54,6 +54,31 @@
   }
 }
 
+.logo-preview {
+  display: flex;
+  justify-content: center;
+  padding: 16px 0;
+
+  img {
+    width: 140px;
+    height: 140px;
+    object-fit: contain;
+    border-radius: 12px;
+    border: 1px solid #e0e0e0;
+    background: #f9f9f9;
+    padding: 8px;
+  }
+
+  @media (min-width: 768px) {
+    padding: 24px 0;
+
+    img {
+      width: 180px;
+      height: 180px;
+    }
+  }
+}
+
 .form-title {
   font-size: 22px;
   font-weight: 700;

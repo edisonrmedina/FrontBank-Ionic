@@ -7,6 +7,10 @@
   <div class="content">
     <h1 class="form-title">{{ pageTitle }}</h1>
 
+    <div class="logo-preview" *ngIf="isEditMode && form.get('logo')?.value">
+      <img [src]="form.get('logo')!.value" alt="Logo del producto" (error)="$event.target.remove()" />
+    </div>
+
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="form-grid">
 
