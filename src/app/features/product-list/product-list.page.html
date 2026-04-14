@@ -1,0 +1,47 @@
+<div class="screen">
+  <header class="banco-header">
+    <span class="banco-icon">🏦</span>
+    <span class="banco-text">BANCO</span>
+  </header>
+
+  <div class="content">
+    <app-search-bar (searchChanged)="onSearch($event)"></app-search-bar>
+
+    <!-- async pipe: se suscribe automáticamente y se desuscribe al destruir el componente -->
+    <app-skeleton-list *ngIf="isLoading$ | async" [rows]="7"></app-skeleton-list>
+
+    <ng-container *ngIf="!(isLoading$ | async)">
+      <div class="product-list" *ngIf="filteredProducts$ | async as products">
+        <div
+          class="product-row"
+          *ngFor="let product of products"
+          (click)="navigateToDetail(product)"
+          data-testid="product-item"
+        >
+          <div class="product-info">
+            <span class="product-name">{{ product.name }}</span>
+            <span class="product-id">ID: {{ product.id }}</span>
+          </div>
+          <span class="chevron">›</span>
+        </div>
+
+        <div *ngIf="products.length === 0" class="empty-state">
+          <p>No se encontraron productos</p>
+        </div>
+      </div>
+    </ng-container>
+
+    <div class="spacer"></div>
+
+    <button class="btn-add" (click)="navigateToCreate()" data-testid="btn-add">
+      Agregar
+    </button>
+  </div>
+
+  <app-confirm-modal
+    [isOpen]="showDeleteModal"
+    [message]="'¿Estás seguro de eliminar el producto ' + (productToDelete?.name || '') + '?'"
+    (confirmed)="confirmDelete()"
+    (cancelled)="cancelDelete()"
+  ></app-confirm-modal>
+</div>

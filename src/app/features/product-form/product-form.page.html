@@ -1,0 +1,53 @@
+<div class="screen">
+  <header class="banco-header">
+    <span class="banco-icon">🏦</span>
+    <span class="banco-text">BANCO</span>
+  </header>
+
+  <div class="content">
+    <h1 class="form-title">{{ pageTitle }}</h1>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+      <div class="form-group" [class.has-error]="hasError('id')">
+        <label for="id">ID</label>
+        <input id="id" type="text" formControlName="id" data-testid="input-id" />
+        <span class="error-msg" *ngIf="hasError('id')">{{ getErrorMessage('id') }}</span>
+      </div>
+
+      <div class="form-group" [class.has-error]="hasError('name')">
+        <label for="name">Nombre</label>
+        <input id="name" type="text" formControlName="name" data-testid="input-name" />
+        <span class="error-msg" *ngIf="hasError('name')">{{ getErrorMessage('name') }}</span>
+      </div>
+
+      <div class="form-group" [class.has-error]="hasError('description')">
+        <label for="description">Descripción</label>
+        <input id="description" type="text" formControlName="description" data-testid="input-description" />
+        <span class="error-msg" *ngIf="hasError('description')">{{ getErrorMessage('description') }}</span>
+      </div>
+
+      <div class="form-group" [class.has-error]="hasError('logo')">
+        <label for="logo">Logo</label>
+        <input id="logo" type="text" formControlName="logo" data-testid="input-logo" />
+        <span class="error-msg" *ngIf="hasError('logo')">{{ getErrorMessage('logo') }}</span>
+      </div>
+
+      <div class="form-group" [class.has-error]="hasError('date_release')">
+        <label for="date_release">Fecha Liberación</label>
+        <input id="date_release" type="date" formControlName="date_release" data-testid="input-date-release" />
+        <span class="error-msg" *ngIf="hasError('date_release')">{{ getErrorMessage('date_release') }}</span>
+      </div>
+
+      <div class="form-group">
+        <label for="date_revision">Fecha Revisión</label>
+        <input id="date_revision" type="date" formControlName="date_revision" data-testid="input-date-revision" />
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-submit" [disabled]="form.invalid || isSubmitting" data-testid="btn-submit">Enviar</button>
+        <button type="button" class="btn btn-reset" (click)="onReset()" data-testid="btn-reset">Reiniciar</button>
+      </div>
+    </form>
+  </div>
+</div>

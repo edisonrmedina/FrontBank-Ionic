@@ -34,4 +34,23 @@
 
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import '@ionic/angular/css/palettes/dark.system.css';
+/* @import '@ionic/angular/css/palettes/dark.system.css'; */
+
+/* Global header style matching D1 design */
+.banco-header {
+  ion-toolbar {
+    --background: #fff;
+    --border-color: #e0e0e0;
+  }
+
+  ion-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1a1a5e;
+    text-align: center;
+
+    .banco-logo {
+      font-size: 14px;
+    }
+  }
+}

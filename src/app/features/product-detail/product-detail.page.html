@@ -1,0 +1,61 @@
+<div class="screen">
+  <header class="banco-header">
+    <span class="banco-icon">🏦</span>
+    <span class="banco-text">BANCO</span>
+  </header>
+
+  <div class="content">
+    <app-skeleton-list *ngIf="isLoading$ | async" [rows]="4"></app-skeleton-list>
+
+    <ng-container *ngIf="selectedProduct$ | async as product">
+      <div class="detail-content">
+        <div class="detail-header">
+          <h1 class="detail-id">ID: {{ product.id }}</h1>
+          <p class="detail-sub">Información extra</p>
+        </div>
+
+        <div class="detail-fields">
+          <div class="field-row">
+            <span class="field-label">Nombre</span>
+            <span class="field-value">{{ product.name }}</span>
+          </div>
+          <div class="field-row">
+            <span class="field-label">Descripción</span>
+            <span class="field-value">{{ product.description }}</span>
+          </div>
+          <div class="field-row field-logo">
+            <span class="field-label">Logo</span>
+            <img
+              [src]="product.logo"
+              [alt]="product.name"
+              class="logo-img"
+              (error)="$any($event.target).src='assets/icon/favicon.png'"
+            />
+          </div>
+          <div class="field-row">
+            <span class="field-label">Fecha liberación</span>
+            <span class="field-value">{{ product.date_release }}</span>
+          </div>
+          <div class="field-row">
+            <span class="field-label">Fecha revisión</span>
+            <span class="field-value">{{ product.date_revision }}</span>
+          </div>
+        </div>
+
+        <div class="spacer"></div>
+
+        <div class="detail-actions">
+          <button class="btn btn-edit" (click)="navigateToEdit()">Editar</button>
+          <button class="btn btn-delete" (click)="openDeleteModal()">Eliminar</button>
+        </div>
+      </div>
+
+      <app-confirm-modal
+        [isOpen]="showDeleteModal"
+        [message]="'¿Estás seguro de eliminar el producto ' + product.name + '?'"
+        (confirmed)="confirmDelete()"
+        (cancelled)="cancelDelete()"
+      ></app-confirm-modal>
+    </ng-container>
+  </div>
+</div>
