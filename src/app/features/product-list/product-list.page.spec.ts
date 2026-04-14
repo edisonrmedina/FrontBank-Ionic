@@ -51,7 +51,8 @@ describe('ProductListPage', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should call loadProducts on init', () => {
+  it('should call loadProducts on ionViewWillEnter', () => {
+    component.ionViewWillEnter();
     expect(mockFacade.loadProducts).toHaveBeenCalled();
   });
 

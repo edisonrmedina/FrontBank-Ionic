@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { Subject, takeUntil, debounceTime, distinctUntilChanged } from 'rxjs';
+import { ViewWillEnter } from '@ionic/angular';
+import { IonContent } from '@ionic/angular/standalone';
 import { Product } from '../../core/models/product.model';
 import { ProductFacadeService } from '../../core/facades/product-facade.service';
 import { SearchBarComponent } from '../../shared/components/search-bar/search-bar.component';
@@ -21,13 +23,13 @@ import { SkeletonListComponent } from '../../shared/components/skeleton-list/ske
   selector: 'app-product-list',
   standalone: true,
   imports: [
-    CommonModule,
+    CommonModule, IonContent,
     SearchBarComponent, ConfirmModalComponent, SkeletonListComponent,
   ],
   templateUrl: './product-list.page.html',
   styleUrls: ['./product-list.page.scss'],
 })
-export class ProductListPage implements OnInit, OnDestroy {
+export class ProductListPage implements OnInit, OnDestroy, ViewWillEnter {
   /** Observables del estado — se consumen con async pipe en el template */
   filteredProducts$ = this.facade.filteredProducts$;
   isLoading$ = this.facade.isLoading$;
@@ -47,8 +49,12 @@ export class ProductListPage implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.facade.loadProducts();
     this.setupSearchDebounce();
+  }
+
+  /** Ionic lifecycle: se ejecuta cada vez que se entra a la vista */
+  ionViewWillEnter(): void {
+    this.facade.loadProducts();
   }
 
   /**
