@@ -1,5 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-import { ProductStateService, ProductState } from './product-state.service';
+import { ProductStateService } from './product-state.service';
+import { ProductState } from '../interfaces/product-state.interface';
 import { Product } from '../models/product.model';
 import { take } from 'rxjs';
 

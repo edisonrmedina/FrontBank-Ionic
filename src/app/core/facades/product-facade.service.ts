@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, tap, finalize, catchError, throwError, switchMap, of } from 'rxjs';
 import { ProductRepository } from '../interfaces/product-repository.interface';
 import { NotificationService } from '../interfaces/notification.interface';
-import { ProductStateService } from '../state/product-state.service';
+import { ProductStatePort } from '../interfaces/product-state.interface';
 import { Product, ProductMutationResponse } from '../models/product.model';
 
 /**
@@ -20,7 +20,8 @@ import { Product, ProductMutationResponse } from '../models/product.model';
  * - catchError: manejo de errores dentro del pipe
  *
  * SRP: Solo orquesta flujos de datos (no hace UI ni HTTP directo).
- * DIP: Depende de abstracciones (ProductRepository, NotificationService).
+ * DIP: Depende SOLO de abstracciones (ProductRepository, NotificationService, ProductStatePort).
+ *      Ninguna dependencia concreta — 100% DIP compliance.
  */
 @Injectable({ providedIn: 'root' })
 export class ProductFacadeService {
@@ -34,7 +35,7 @@ export class ProductFacadeService {
   constructor(
     private readonly productRepo: ProductRepository,
     private readonly notification: NotificationService,
-    private readonly state: ProductStateService,
+    private readonly state: ProductStatePort,
   ) {}
 
   loadProducts(): void {

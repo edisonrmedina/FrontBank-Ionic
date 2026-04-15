@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, distinctUntilChanged, map, shareReplay } from 'rxjs';
 import { Product } from '../models/product.model';
+import { ProductState, ProductStatePort } from '../interfaces/product-state.interface';
 
 /**
- * Gestión de estado centralizado usando BehaviorSubject (patrón Store reactivo).
+ * Implementación concreta del store de estado usando BehaviorSubject.
  *
  * ¿Por qué BehaviorSubject y no NgRx?
  * - BehaviorSubject es ideal para apps de tamaño pequeño-mediano.
@@ -11,16 +12,9 @@ import { Product } from '../models/product.model';
  * - Demuestra el mismo concepto: estado centralizado, inmutable, reactivo.
  *
  * SRP: Solo gestiona el estado de productos (no hace HTTP ni UI).
- * DIP: Los componentes dependen de esta abstracción de estado, no de variables locales.
+ * LSP: Extiende ProductStatePort — cualquier otra implementación (NgRx, Akita)
+ *      puede sustituir esta clase sin afectar al Facade ni a los componentes.
  */
-
-export interface ProductState {
-  products: Product[];
-  selectedProduct: Product | null;
-  isLoading: boolean;
-  error: string | null;
-  searchTerm: string;
-}
 
 const initialState: ProductState = {
   products: [],
@@ -31,7 +25,7 @@ const initialState: ProductState = {
 };
 
 @Injectable({ providedIn: 'root' })
-export class ProductStateService {
+export class ProductStateService extends ProductStatePort {
   private readonly state$ = new BehaviorSubject<ProductState>(initialState);
 
   /**

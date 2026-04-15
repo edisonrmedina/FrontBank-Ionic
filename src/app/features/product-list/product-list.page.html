@@ -9,7 +9,7 @@
     <app-search-bar (searchChanged)="onSearch($event)"></app-search-bar>
 
     <!-- async pipe: se suscribe automáticamente y se desuscribe al destruir el componente -->
-    <app-skeleton-list *ngIf="isLoading$ | async" [rows]="7"></app-skeleton-list>
+    <app-skeleton-list *ngIf="isLoading$ | async" [rows]="4"></app-skeleton-list>
 
     <ng-container *ngIf="!(isLoading$ | async)">
       <div class="product-list" *ngIf="filteredProducts$ | async as products">
@@ -31,8 +31,6 @@
         </div>
       </div>
     </ng-container>
-
-    <div class="spacer"></div>
 
     <button class="btn-add" (click)="navigateToCreate()" data-testid="btn-add">
       Agregar

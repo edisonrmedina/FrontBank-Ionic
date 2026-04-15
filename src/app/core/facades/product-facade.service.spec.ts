@@ -2,6 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { ProductFacadeService } from './product-facade.service';
 import { ProductRepository } from '../interfaces/product-repository.interface';
 import { NotificationService } from '../interfaces/notification.interface';
+import { ProductStatePort } from '../interfaces/product-state.interface';
 import { ProductStateService } from '../state/product-state.service';
 import { Product, ProductMutationResponse, ProductResponse, ProductDeleteResponse } from '../models/product.model';
 import { of, throwError } from 'rxjs';
@@ -42,6 +43,7 @@ describe('ProductFacadeService', () => {
       providers: [
         ProductFacadeService,
         ProductStateService,
+        { provide: ProductStatePort, useExisting: ProductStateService },
         { provide: ProductRepository, useValue: mockRepo },
         { provide: NotificationService, useValue: mockNotification },
       ],

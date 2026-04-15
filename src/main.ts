@@ -10,11 +10,16 @@ import { ProductRepository } from './app/core/interfaces/product-repository.inte
 import { ProductHttpService } from './app/core/services/product-http.service';
 import { NotificationService } from './app/core/interfaces/notification.interface';
 import { ToastNotificationService } from './app/core/services/toast-notification.service';
+import { ProductStatePort } from './app/core/interfaces/product-state.interface';
+import { ProductStateService } from './app/core/state/product-state.service';
 
 /**
  * DIP: Aquí se configura la inyección de dependencias.
- * Los componentes dependen de abstracciones (ProductRepository, NotificationService)
+ * Los componentes dependen de abstracciones (ProductRepository, NotificationService, ProductStatePort)
  * y aquí se resuelven con sus implementaciones concretas.
+ *
+ * Para cambiar la implementación del estado (ej: NgRx, SignalStore),
+ * solo se modifica esta línea: { provide: ProductStatePort, useClass: NgrxStateService }
  */
 bootstrapApplication(AppComponent, {
   providers: [
@@ -24,5 +29,6 @@ bootstrapApplication(AppComponent, {
     provideHttpClient(withInterceptors([errorInterceptor])),
     { provide: ProductRepository, useClass: ProductHttpService },
     { provide: NotificationService, useClass: ToastNotificationService },
+    { provide: ProductStatePort, useClass: ProductStateService },
   ],
 });
